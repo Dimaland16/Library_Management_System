@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Book</title>
+  <link rel="stylesheet" th:href="@{/css/edit.css}">
+</head>
+<body>
+
+<div class="container">
+  <h2>Edit Book</h2>
+  <form th:action="@{|/books/${book.id}|}" th:object="${book}" th:method="put" class="book-form">
+
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" th:field="*{title}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="publicationYear">Publication Year:</label>
+      <input type="number" id="publicationYear" th:field="*{publicationYear}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="pages">Pages:</label>
+      <input type="number" id="pages" th:field="*{pages}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="author1">Author 1:</label>
+      <input type="text" id="author1" name="authorNames" th:value="${book.authors.size() > 0 ? book.authors[0].name : ''}" required>
+    </div>
+    <div class="form-group">
+      <label for="author2">Author 2 (optional):</label>
+      <input type="text" id="author2" name="authorNames" th:value="${book.authors.size() > 1 ? book.authors[1].name : ''}">
+    </div>
+    <div class="form-group">
+      <label for="author3">Author 3 (optional):</label>
+      <input type="text" id="author3" name="authorNames" th:value="${book.authors.size() > 2 ? book.authors[2].name : ''}">
+    </div>
+
+    <div class="form-group">
+      <label for="publisher">Publisher:</label>
+      <input type="text" id="publisher" name="publisherName" th:field="*{publisher.name}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="categories">Categories:</label>
+      <select id="categories" th:field="*{categories}" multiple required>
+        <option th:each="category : ${categories}"
+                th:value="${category.id}"
+                th:text="${category.name}"
+                th:selected="${book.categories.contains(category)}"></option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="button add-button">Update Book</button>
+      <a th:href="@{|/books/${book.id}|}" class="button back-button">Back to Book</a>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

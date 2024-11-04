@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Library - All Books</title>
+  <link rel="stylesheet" th:href="@{/css/books.css}">
+  <script src="/js/categoryToggle.js"></script>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Library Management System</h1>
+    <a th:href="@{/books/new}" class="add-book-btn">Add New Book</a>
+  </header>
+
+  <div class="search-bar">
+    <form th:action="@{/books/search}" method="get">
+      <input type="text" name="title" placeholder="Search by title" th:value="${search}">
+      <input type="hidden" name="categoryId" th:value="${selectedCategoryId}">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <div class="content">
+
+    <aside class="categories">
+      <h3>Categories</h3>
+      <ul>
+        <li>
+          <a th:href="@{/books}"
+             th:classappend="${selectedCategoryId == null ? 'active' : ''}"
+             class="category-link">All Books</a>
+        </li>
+
+        <li th:each="category : ${categories}">
+          <a th:href="@{|/books/categories/${category.id}|}"
+             th:classappend="${selectedCategoryId == category.id ? 'active' : ''}"
+             class="category-link"
+             th:text="${category.name}"></a>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="books">
+      <div class="book-grid">
+        <div class="book-card" th:each="book : ${books}">
+          <div class="book-cover">
+            <img src="https://cdn.pixabay.com/photo/2017/01/31/23/59/book-2028349_1280.png" alt="Book Cover">
+          </div>
+          <div class="book-info">
+            <h2 th:text="${book.title}">Book Title</h2>
+            <p><strong>Publication Year:</strong> <span th:text="${book.publicationYear}">Year</span></p>
+            <p><strong>Pages:</strong> <span th:text="${book.pages}">Pages</span></p>
+            <a th:href="@{|/books/${book.id}|}" class="details-btn">View Details</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

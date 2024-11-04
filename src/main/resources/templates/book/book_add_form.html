@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Book</title>
+    <link rel="stylesheet" th:href="@{/css/book_add_form.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Add a New Book</h2>
+    <form th:action="@{/books/new}" th:object="${book}" method="post" class="book-form">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="publicationYear">Publication Year:</label>
+            <input type="number" id="publicationYear" th:field="*{publicationYear}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" th:field="*{pages}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="author1">Author 1:</label>
+            <input type="text" id="author1" name="authorNames" required>
+        </div>
+        <div class="form-group">
+            <label for="author2">Author 2 (optional):</label>
+            <input type="text" id="author2" name="authorNames">
+        </div>
+        <div class="form-group">
+            <label for="author3">Author 3 (optional):</label>
+            <input type="text" id="author3" name="authorNames">
+        </div>
+
+        <div class="form-group">
+            <label for="publisher">Publisher:</label>
+            <input type="text" id="publisher" name="publisherName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="categories">Categories:</label>
+            <select id="categories" th:field="*{categories}" multiple required>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="button add-button">Add Book</button>
+            <a th:href="@{|/books|}" class="button back-button">Back to Books</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
