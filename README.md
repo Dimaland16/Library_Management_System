@@ -31,7 +31,7 @@
    - Укажите данные для подключения к базе данных в `application.properties`.
 
 4. **Запустите приложение**:
-    ```bash
+    ```bash 
     mvn spring-boot:run
     ```
 
