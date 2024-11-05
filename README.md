@@ -37,7 +37,7 @@
 
 5. Откройте браузер и перейдите по адресу `http://localhost:8080/books`.
 
-## Примеры работы
+## Пример работы
 ### Главная страница
 ![image](https://github.com/user-attachments/assets/ec5c0d43-22e4-41ea-ad8d-c0ab5c69d617)
 
